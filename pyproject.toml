@@ -1,0 +1,76 @@
+[tool.poetry]
+name = "nlp_demo"
+description = "Gradio App with simple NLP demos."
+version = "0.0.0"                                   # necessary but should probably be ignored
+authors = ["Matthias Minder <mdm5@bfh.ch>"]
+# repository = "https://"
+# documentation = "https://"
+packages = [{include = "nlp_demo", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+pandas = "^1.4.4"
+scikit-learn = "^1.1.2"
+matplotlib = "^3.5.3"
+fastparquet = "^0.8.3"
+seaborn = "^0.12.0"
+huggingface = "^0.0.1"
+huggingface-hub = "^0.11.1"
+transformers = "^4.25.1"
+torch = "^1.13.0"
+sentencepiece = "^0.1.97"
+gradio = "^3.12.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"                                   # The uncompromising code formatter.
+coverage = {extras = ["toml"], version = "^6.4.1"}  # Code coverage measurement for Python
+unittest-xml-reporting = "^3.2.0"                   # unittest-based test runner with Ant/JUnit like XML reporting.
+pre-commit = "^2.19.0"                              # A framework for managing and maintaining multi-language pre-commit hooks.
+pre-commit-hooks = "^4.2.0"                         # Some out-of-the-box hooks for pre-commit.
+pyre-check = "^0.9.15"                              # A performant type checker for Python
+pydocstyle = "^6.1.1"                               # Python docstring style checker
+pylint = "^2.14.1"                                  # python code static checker
+reorder-python-imports = "^3.1.0"                   # Tool for reordering python imports
+ipykernel = "^6.15.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pylint.main]
+fail-on = "F,E,W"
+fail-under = 0.0
+
+[tool.pylint.basic]
+good-names = ["i", "j", "k", "n", "s", "d", "ex", "Run", "_", "pk", "x", "y", "df"]
+
+[tool.pylint.format]
+max-line-length = 140
+max-args = 8
+
+[tool.pylint.messages_control]
+disable = [
+    # pydocstyle takes care of this...
+    "missing-module-docstring",
+    "missing-function-docstring",
+    "missing-class-docstring",
+
+    # don't hinder me creating small classes!
+    "too-few-public-methods",
+
+    # reorder-python-imports should know what it's doing
+    "wrong-import-order",
+
+    # can't do much about duplicate imports in two files, I'm afraid...
+    "duplicate-code",
+]
+
+[tool.pylint.miscellaneous]
+notes = []  # don't warn about `TODO` and `FIXME` comments
+
+[tool.pylint.reports]
+output-format = "parseable:pylintout,text"
+
+[tool.pydocstyle]
+match-dir = "[^\\.][^test].*"
+convention = "google"
