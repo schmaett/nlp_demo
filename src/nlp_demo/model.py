@@ -1,6 +1,8 @@
-from transformers import AutoTokenizer, AutoModelForQuestionAnswering, AutoModelForSeq2SeqLM
+from transformers import AutoModelForQuestionAnswering
+from transformers import AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer
 from transformers import pipeline
-        
+
 
 class QAModel:
 
@@ -13,12 +15,12 @@ class QAModel:
         self.pipe = pipeline(self.task, model=model, tokenizer=tokenizer)
 
     def apply(self, context, question):
-        result =  self.pipe(context=context, question=question)
+        result = self.pipe(context=context, question=question)
         return result["answer"]
 
 
 class SummarizationModel:
-    
+
     model_name = "Einmalumdiewelt/T5-Base_GNAD"
     task = "summarization"
 
